@@ -2,12 +2,13 @@ name: Mother & Baby Scanner
 
 on:
   schedule:
-    - cron: "*/15 3-9 * * 1-5"
-    - cron: "0 10 * * 1-5"
-  workflow_dispatch: {}
+    # Hourly at :20 past, 04:20-10:20 UTC = 09:50-15:50 IST, Mon-Fri.
+    # Only 1H/1D signals are scanned now, so hourly is frequent enough.
+    - cron: "20 4-10 * * 1-5"
+  workflow_dispatch: {}  # lets you trigger a run manually from the Actions tab
 
 permissions:
-  contents: write
+  contents: write  # needed to commit the updated state.json back to the repo
 
 jobs:
   scan:
