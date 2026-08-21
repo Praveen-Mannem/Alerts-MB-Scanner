@@ -1,0 +1,35 @@
+name: Daily Stock Screener
+
+on:
+  schedule:
+    # 03:15 UTC = 08:45 IST, Mon-Fri — before market open, before the
+    # scan workflow's first run, so the two never overlap and race on push.
+    - cron: "15 3 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run screener
+        run: python screen.py
+
+      - name: Commit updated watchlist
+        run: |
+          git config user.name "mb-scanner-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add watchlist.csv
+          git diff --cached --quiet || git commit -m "Refresh watchlist [skip ci]"
+          git push
