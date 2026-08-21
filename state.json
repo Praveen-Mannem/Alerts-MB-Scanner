@@ -1,0 +1,22 @@
+{
+  "TCS:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "HDFCBANK:1D": {
+    "status": "SELL",
+    "time": "2026-08-07"
+  },
+  "ICICIBANK:1D": {
+    "status": "BUY",
+    "time": "2026-08-21"
+  },
+  "SBIN:15m": {
+    "status": "SELL",
+    "time": "2026-08-21 15:00:00+05:30"
+  },
+  "BHARTIARTL:15m": {
+    "status": "BUY",
+    "time": "2026-08-21 14:45:00+05:30"
+  }
+}
