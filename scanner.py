@@ -37,7 +37,6 @@ WATCHLIST_FILE = os.path.join(os.path.dirname(__file__), "watchlist.csv")
 
 # yfinance interval strings and how much history to request for each
 TIMEFRAMES = {
-    "15m": {"interval": "15m", "period": "60d"},
     "1H": {"interval": "60m", "period": "180d"},
     "1D": {"interval": "1d", "period": "2y"},
 }
