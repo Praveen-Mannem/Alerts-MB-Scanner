@@ -18,5 +18,225 @@
   "BHARTIARTL:15m": {
     "status": "BUY",
     "time": "2026-08-21 14:45:00+05:30"
+  },
+  "ABCAPITAL:1H": {
+    "status": "BUY",
+    "time": "2026-08-21 09:15:00+05:30"
+  },
+  "ABCAPITAL:1D": {
+    "status": "BUY",
+    "time": "2026-08-20"
+  },
+  "AMBUJACEM:1D": {
+    "status": "SELL",
+    "time": "2026-08-19"
+  },
+  "APOLLOTYRE:1D": {
+    "status": "BUY",
+    "time": "2026-08-21"
+  },
+  "BATAINDIA:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "BEL:1W": {
+    "status": "BUY",
+    "time": "2026-08-10"
+  },
+  "BSOFT:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "BSOFT:1D": {
+    "status": "SELL",
+    "time": "2026-08-14"
+  },
+  "CANBK:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "CONCOR:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "CROMPTON:1D": {
+    "status": "SELL",
+    "time": "2026-08-07"
+  },
+  "DEVYANI:1D": {
+    "status": "BUY",
+    "time": "2026-08-20"
+  },
+  "ETERNAL:1W": {
+    "status": "SELL",
+    "time": "2026-05-11"
+  },
+  "EXIDEIND:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 15:15:00+05:30"
+  },
+  "EXIDEIND:1W": {
+    "status": "SELL",
+    "time": "2026-03-09"
+  },
+  "HDFCBANK:1W": {
+    "status": "SELL",
+    "time": "2026-07-20"
+  },
+  "HDFCLIFE:1H": {
+    "status": "BUY",
+    "time": "2026-08-21 12:15:00+05:30"
+  },
+  "ICICIPRULI:1D": {
+    "status": "SELL",
+    "time": "2026-08-18"
+  },
+  "INDUSTOWER:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "IRCTC:1D": {
+    "status": "SELL",
+    "time": "2026-08-18"
+  },
+  "IRCTC:1W": {
+    "status": "SELL",
+    "time": "2026-07-20"
+  },
+  "JMFINANCIL:1D": {
+    "status": "BUY",
+    "time": "2026-08-20"
+  },
+  "KEC:1W": {
+    "status": "SELL",
+    "time": "2026-07-20"
+  },
+  "MANAPPURAM:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "MANAPPURAM:1W": {
+    "status": "BUY",
+    "time": "2026-05-04"
+  },
+  "MOTHERSON:1W": {
+    "status": "BUY",
+    "time": "2026-07-27"
+  },
+  "MOTILALOFS:1H": {
+    "status": "BUY",
+    "time": "2026-08-21 11:15:00+05:30"
+  },
+  "MOTILALOFS:1D": {
+    "status": "BUY",
+    "time": "2026-08-20"
+  },
+  "NATIONALUM:1H": {
+    "status": "BUY",
+    "time": "2026-08-21 09:15:00+05:30"
+  },
+  "NCC:1D": {
+    "status": "SELL",
+    "time": "2026-08-14"
+  },
+  "NTPC:1D": {
+    "status": "SELL",
+    "time": "2026-08-07"
+  },
+  "OIL:1W": {
+    "status": "BUY",
+    "time": "2026-08-10"
+  },
+  "PATANJALI:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 13:15:00+05:30"
+  },
+  "RAILTEL:1D": {
+    "status": "SELL",
+    "time": "2026-07-31"
+  },
+  "RAIN:1D": {
+    "status": "BUY",
+    "time": "2026-08-21"
+  },
+  "RECLTD:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 14:15:00+05:30"
+  },
+  "RECLTD:1D": {
+    "status": "SELL",
+    "time": "2026-08-14"
+  },
+  "RECLTD:1W": {
+    "status": "SELL",
+    "time": "2026-08-10"
+  },
+  "RVNL:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 12:15:00+05:30"
+  },
+  "RVNL:1D": {
+    "status": "SELL",
+    "time": "2026-08-19"
+  },
+  "SBICARD:1H": {
+    "status": "BUY",
+    "time": "2026-08-21 15:15:00+05:30"
+  },
+  "SBICARD:1W": {
+    "status": "SELL",
+    "time": "2026-05-11"
+  },
+  "SUMICHEM:1D": {
+    "status": "BUY",
+    "time": "2026-08-06"
+  },
+  "SUMICHEM:1W": {
+    "status": "BUY",
+    "time": "2026-08-10"
+  },
+  "TANLA:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 12:15:00+05:30"
+  },
+  "TATACHEM:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 14:15:00+05:30"
+  },
+  "TATACHEM:1D": {
+    "status": "SELL",
+    "time": "2026-08-17"
+  },
+  "TATASTEEL:1H": {
+    "status": "SELL",
+    "time": "2026-08-20 13:15:00+05:30"
+  },
+  "TMPV:1D": {
+    "status": "SELL",
+    "time": "2026-08-18"
+  },
+  "TMPV:1W": {
+    "status": "SELL",
+    "time": "2026-07-20"
+  },
+  "UNIONBANK:1W": {
+    "status": "BUY",
+    "time": "2026-08-03"
+  },
+  "UPL:1W": {
+    "status": "SELL",
+    "time": "2026-08-03"
+  },
+  "USHAMART:1D": {
+    "status": "BUY",
+    "time": "2026-08-05"
+  },
+  "VBL:1H": {
+    "status": "SELL",
+    "time": "2026-08-21 09:15:00+05:30"
+  },
+  "VEDL:1D": {
+    "status": "SELL",
+    "time": "2026-08-18"
   }
 }
