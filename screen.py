@@ -1,60 +1,47 @@
 """
 NSE Universe Screener
 ======================================================================
-Pulls NSE's full official equity list, checks each stock's recent price
-and average volume via yfinance, and filters down to stocks that fit:
+Filters a maintained universe of liquid NSE stocks (nse_universe.csv) by
+recent price and average volume via yfinance, and writes whatever
+qualifies to watchlist.csv, which scanner.py then scans regularly.
+
+WHY A STATIC UNIVERSE FILE INSTEAD OF SCRAPING NSE DIRECTLY:
+nseindia.com actively blocks traffic from cloud/CI IP ranges (GitHub
+Actions, AWS, Azure, etc.) — this is a long-standing, IP-range-based block
+that doesn't respond to better headers or retries. yfinance, by contrast,
+works reliably from GitHub Actions (confirmed in production use here).
+So we keep the "which stocks exist" list as a maintained local file and
+only use yfinance for the "does it pass the price/volume filter" part.
+
+nse_universe.csv is a maintained list of liquid NSE stocks across sectors
+— not a live mirror of an official index. Edit it directly to add/remove
+names as you like; it only needs occasional updates (e.g. a new listing
+you want tracked), not daily refreshing.
+
+Filters applied:
   - Last close price between MIN_PRICE and MAX_PRICE (inclusive)
   - 20-day average volume >= MIN_AVG_VOLUME (a liquidity floor)
-
-Writes the filtered symbol list to watchlist.csv, which scanner.py then
-scans every 15 minutes. Meant to run once a day (before market open),
-since price/volume screening doesn't need to be intraday-fresh.
-
-No API key needed — NSE's list is a public CSV, and yfinance is free.
 """
 
-import io
+import os
 import time
-import requests
 import pandas as pd
 import yfinance as yf
 
-NSE_LIST_URL = "https://nsearchives.nseindia.com/content/equity/EQUITY_L.csv"
-WATCHLIST_FILE = "watchlist.csv"
+UNIVERSE_FILE = os.path.join(os.path.dirname(__file__), "nse_universe.csv")
+WATCHLIST_FILE = os.path.join(os.path.dirname(__file__), "watchlist.csv")
 
 MIN_PRICE = 100.0
 MAX_PRICE = 1000.0
 MIN_AVG_VOLUME = 500_000  # 20-day average daily volume floor — adjust as needed
 
-BATCH_SIZE = 150  # symbols per yfinance batch call
+BATCH_SIZE = 100  # symbols per yfinance batch call
 LOOKBACK_PERIOD = "1mo"
 
 
-def fetch_nse_symbol_list():
-    """
-    NSE's site blocks generic requests without browser-like headers and an
-    initial cookie-setting visit, so we mimic that handshake.
-    """
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
-        ),
-        "Accept": "text/csv,application/csv,*/*",
-    }
-    session = requests.Session()
-    session.headers.update(headers)
-    session.get("https://www.nseindia.com", timeout=15)  # sets cookies
-    resp = session.get(NSE_LIST_URL, timeout=20)
-    resp.raise_for_status()
-
-    df = pd.read_csv(io.StringIO(resp.text))
-    df.columns = [c.strip() for c in df.columns]
-    # Keep only the main equity board (excludes SME/illiquid series)
-    if "SERIES" in df.columns:
-        df = df[df["SERIES"].str.strip() == "EQ"]
-    symbols = df["SYMBOL"].str.strip().tolist()
-    return symbols
+def load_universe():
+    with open(UNIVERSE_FILE) as f:
+        return [line.strip() for line in f if line.strip()]
 
 
 def chunked(seq, size):
@@ -100,9 +87,9 @@ def screen_batch(symbols):
 
 
 def main():
-    print("Fetching NSE equity symbol list...")
-    symbols = fetch_nse_symbol_list()
-    print(f"Got {len(symbols)} symbols on the EQ board. Screening in batches of {BATCH_SIZE}...")
+    symbols = load_universe()
+    print(f"Loaded {len(symbols)} symbols from nse_universe.csv. "
+          f"Screening in batches of {BATCH_SIZE}...")
 
     qualifying = []
     for batch_num, batch in enumerate(chunked(symbols, BATCH_SIZE), start=1):
@@ -113,6 +100,11 @@ def main():
     qualifying = sorted(set(qualifying))
     print(f"{len(qualifying)} symbols passed the filter "
           f"(price {MIN_PRICE}-{MAX_PRICE}, avg volume >= {MIN_AVG_VOLUME:,}).")
+
+    if not qualifying:
+        print("WARNING: 0 symbols passed. Leaving watchlist.csv unchanged "
+              "rather than wiping it out — check MIN_PRICE/MAX_PRICE/MIN_AVG_VOLUME.")
+        return
 
     with open(WATCHLIST_FILE, "w") as f:
         f.write("symbol\n")
