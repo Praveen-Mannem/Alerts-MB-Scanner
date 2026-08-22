@@ -228,8 +228,21 @@ def main():
             time.sleep(0.3)  # be polite to Yahoo's endpoint
 
     if alerts:
-        send_telegram("\n\n".join(alerts))
-        print(f"Sent {len(alerts)} alert(s).")
+        # Telegram caps messages at ~4096 chars — batch alerts into safe chunks
+        # instead of sending one giant message that gets silently rejected.
+        MAX_CHARS = 3500
+        batch, batch_len, sent_batches = [], 0, 0
+        for msg in alerts:
+            if batch and batch_len + len(msg) + 2 > MAX_CHARS:
+                send_telegram("\n\n".join(batch))
+                sent_batches += 1
+                batch, batch_len = [], 0
+            batch.append(msg)
+            batch_len += len(msg) + 2
+        if batch:
+            send_telegram("\n\n".join(batch))
+            sent_batches += 1
+        print(f"Sent {len(alerts)} alert(s) across {sent_batches} Telegram message(s).")
     else:
         print("No new signals this run.")
 
