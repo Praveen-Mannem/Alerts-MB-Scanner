@@ -39,6 +39,7 @@ WATCHLIST_FILE = os.path.join(os.path.dirname(__file__), "watchlist.csv")
 TIMEFRAMES = {
     "1H": {"interval": "60m", "period": "180d"},
     "1D": {"interval": "1d", "period": "2y"},
+    "1W": {"interval": "1wk", "period": "5y"},
 }
 
 # ---- Pattern engine parameters (mirrors Pine script defaults) ----
